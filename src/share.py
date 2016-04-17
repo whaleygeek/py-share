@@ -14,15 +14,37 @@ class Share():
 
     def send(self, name, data=None):
         trace("send:%s=%s" % (name, data))
+        # if file exists
+            # wait for file to not exist
+        # create the file
+        # if there is data
+            # write data to the file
+        # close the file
 
 
     def check(self, name, wait=False):
         trace("check:%s" % name)
+        # if file exists
+            # return True
+        # else if wait
+            # wait for file to exist
+            # return True
+        # returl False
         return False
 
 
     def get(self, name, wait=False):
         trace("wait:%s" % name)
+        # if wait
+            # wait for file to exist
+        # if file exists
+            # open file
+            # read contents into string variable
+            # close file
+            # delete file
+            # return string
+        # else
+            # return None
         return None
 
 
