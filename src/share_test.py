@@ -6,31 +6,31 @@ import share
 import time
 
 
-def tx():
-    share.face("happy")
+def tx(n=0):
+    share.face("happy:%d" % n)
 
 
 def rx():
     if share.isFace():
-        f = share.getFace()
-        print(f)
+        d = share.getFace()
+        print(d)
 
 
 def test():
     for i in range(10):
-        tx()
+        tx(i)
         rx()
         time.sleep(0.5)
 
 
 def test_tx():
     for i in range(10):
-        tx()
+        tx(i)
         time.sleep(0.5)
 
 
 def test_rx():
-    for i in range(10):
+    while True:
         rx()
         time.sleep(0.5)
 
