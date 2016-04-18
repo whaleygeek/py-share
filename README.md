@@ -44,10 +44,11 @@ In terminal window B:
 
     python share_test.py tx
     
-Note that you could use python version 2 (python) in one terminal,
-and python version 3 (python3) in another terminal.
+Note that you could use Python version 2 (python) in one terminal,
+and Python version 3 (python3) in another terminal.
+and Python version 3 (python3) in another terminal.
 
-The tx tester will share 10 messges. The rx tester will receive and
+The tx tester will share 10 messages. The rx tester will receive and
 display those messages. That's it!
 
 
@@ -230,7 +231,7 @@ MQTT or some other pub/sub mechanism if you need those features.
   custom handler function.
   
 * Deciding whether to support a richer argument passing syntax in the
-  share.send - multiple arguments passed could be wrapped together in
+  share.send() - multiple arguments passed could be wrapped together in
   the data sent in the file (e.g. one per line), and unwrapped at the
   get() end (e.g. returned as a tuple). This would make it possible
   to turn this into an arbitrary remote procedure call mechanism,
