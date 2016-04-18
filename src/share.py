@@ -9,7 +9,7 @@ import time
 
 
 def trace(msg):
-    print(str(msg))
+    pass#print(str(msg))
 
 EXTN      = ".share"
 POLL_RATE = 0.5
@@ -21,6 +21,7 @@ class Share():
 
 
     def send(self, name, data=None):
+        """Signal and send data"""
         trace("send:%s=%s" % (name, data))
         name += EXTN
 
@@ -36,6 +37,7 @@ class Share():
 
 
     def check(self, name, wait=False):
+        """Check if a share has been signalled"""
         trace("check:%s" % name)
         name += EXTN
 
@@ -51,6 +53,7 @@ class Share():
 
 
     def get(self, name, wait=False):
+        """Get data from a share and reset it"""
         trace("wait:%s" % name)
         name += EXTN
         if wait:
@@ -72,29 +75,33 @@ class Share():
 
 
     def __dir__(self):
-        return []
+        return ["send","check","get"]
 
 
     def __getattr__(self, name):
         if name.startswith("is"):
             name = name[2:]
-            print("build a checker for: %s" % name)
+            trace("build a checker for: %s" % name)
             def fn():
                 return self.check(name)
 
         elif name.startswith("get"):
             name = name[3:]
-            print("build a getter for:%s" % name)
+            trace("build a getter for:%s" % name)
             def fn():
                 return self.get(name)
 
         else:
-            print("build a sender for:%s" % name)
+            trace("build a sender for:%s" % name)
             def fn(data=None):
                 return self.send(name, data)
 
         return fn
 
+
+# Facade this module as a Class, so that we can use __getattr__ to
+# dynamically build wrapper functions for any function name provided
+# by the caller.
 
 import sys
 sys.modules[__name__] = Share(sys.modules[__name__])

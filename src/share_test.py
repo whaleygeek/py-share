@@ -6,8 +6,10 @@ import share
 import time
 
 
-def tx(n=0):
-    share.face("happy:%d" % n)
+def tx(i=""):
+    data = "data %s" % str(i)
+    print(data)
+    share.face(data)
 
 
 def rx():
