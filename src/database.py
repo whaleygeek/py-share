@@ -16,52 +16,52 @@
 
 # Database - the key abstraction
 #   lifecycle
-#     create - create a new database
-#     open - open an existing database
-#     close - close the open database
-#     remove - remove the database completely
+#     create(name)        - create a new database
+#     open(name)          - open an existing database
+#     close()             - close the open database
+#     remove(name)        - remove the database completely
+#     revision()->number  - unique revision number of this database (increments on each write)
 #   write
-#     set - set a key to a value
-#     delete - delete a key
+#     set(key, value)     - set a key to a value
+#     delete(key)         - delete a key
 #   read
-#     check - check if a key exists
-#     get - get the value associated with a key
-#     list - list all keys
+#     check(key)->flag    - check if a key exists
+#     get(key)->value     - get the value associated with a key
+#     list()->keys(iter)  - list all keys
 
-# Store - a local cache of values
+# Store - a local cache of values, possibly non-volatile, possibly platform-dependent format
 #   lifecycle
-#     create - create a new store
-#     open - open an existing store
-#     close - close the store
-#     remove - remove any persistent version of the store
-#     lock - enable an exclusive lock
-#     unlock - disable an exclusive lock
+#     create(name)        - create a new store
+#     open(name)          - open an existing store
+#     close()             - close the store
+#     remove(name)        - remove any persistent version of the store
+#     revision()->number  - unique revision number of this database (increments on each write)
+#     lock()              - enable an exclusive lock
+#     unlock()            - disable an exclusive lock
 #   write
-#     set - set a key to a value
-#     delete - delete a key
+#     set(key, value)     - set a key to a value
+#     delete(key)         - delete a key
 #   read
-#     check - check if a key exists
-#     get - get the value associated with a key
-#     list - get all keys
+#     check(key)->flag    - check if a key exists
+#     get(key)->value     - get the value associated with a key
+#     list()->keys(iter)  - get all keys
 
 # Protocol - the wire protocol for exchanging updates via some form of transport
 #  lifecycle
-#    start - start a communications session
-#    create - create a new database
-#    remove - remove an existing database
-#    finish - finish a communications session
+#    start(topic)         - start a communications session
+#    finish()             - finish a communications session
 #  write
-#    set - set a key to a value
-#    delete - delete a key
+#    set(key, value)      - set a key to a value
+#    delete(key)          - delete a key
 #  sync
-#    request - request history catchup from other copies
+#    request(from, to)    - request history catchup from other copies, between revisions
 #  comms
-#    send - send a raw encoded message
-#    incoming - receive a raw encoded message
+#    send(msg)            - send a raw encoded message
+#    incoming(msg)        - receive a raw encoded message
 #  handlers
-#    dispatch - route a raw encoded message to correct handler
-#    do_set - set a key to a value
-#    do_delete - delete a key
-#    do_request - request history to be sent
+#    dispatch(msg)        - route a raw encoded message to correct handler
+#    do_set(key, value)   - set a key to a value
+#    do_delete(key)       - delete a key
+#    do_request(from, to) - request history to be sent between two revisions
 
 # END
