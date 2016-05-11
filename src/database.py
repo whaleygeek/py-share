@@ -1,5 +1,7 @@
 # database.py  11/05/2016  D.J.Whale
 #
+# STAGE: INTERFACE PROPOSAL
+
 # A simple distributed database abstraction.
 #
 # This database can be layered on top of any form of transport.
@@ -11,8 +13,13 @@
 # Probably serialised in json for transfer and storage
 # Surfaces again at the other end as a python object.
 # passing in json values is probably bad.
+# mostly survives on live multicast updates
+# synchronisation provides a way to catch up on history.
+# database revision numbers used to detect and request missing data
 
-# DatabaseError
+
+# DatabaseError - raised if something can't be done
+
 
 # Database - the key abstraction
 #   lifecycle
@@ -49,8 +56,10 @@
 #     get(key)->value     - get the value associated with a key
 #     list()->keys(iter)  - get all keys
 
+
 # DBMStore - a dbm implementation of a Store()
 #TODO same interface as Store()
+
 
 # Protocol - the wire protocol for exchanging updates via some form of transport
 #  lifecycle
@@ -80,12 +89,12 @@
 #   check()->flag
 #   peek()->msg or None
 #   read()->msg or Exception
-#   on_incoming(callable)
+#   on_remote_write(callable)
 
 
 #----- TEST HARNESS -----------------------------------------------------------
 
-# db = Database(Store, Protocol(Multicast))
+# db = Database(DBMStore, Protocol(Multicast))
 # db.create("secrets", "0.0.0.0:8080")
 
 # db.write("password", "fred")
@@ -104,5 +113,9 @@
 # db.push(0,100)
 # db.push(0,db.revision()-1)
 
+# def do_write(key, value): print(key, value)
+# db.on_remote_write(do_write)
+
+# db.close()
 
 # END
