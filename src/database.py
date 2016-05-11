@@ -16,51 +16,52 @@
 
 # Database - the key abstraction
 #   lifecycle
-#     open
-#     close
-#     remove
+#     create - create a new database
+#     open - open an existing database
+#     close - close the open database
+#     remove - remove the database completely
 #   write
-#     set
-#     delete
+#     set - set a key to a value
+#     delete - delete a key
 #   read
-#     check
-#     get
-#     list
+#     check - check if a key exists
+#     get - get the value associated with a key
+#     list - list all keys
 
 # Store - a local cache of values
 #   lifecycle
-#     open
-#     close
-#     remove
-#     lock
-#     unlock
+#     create - create a new store
+#     open - open an existing store
+#     close - close the store
+#     remove - remove any persistent version of the store
+#     lock - enable an exclusive lock
+#     unlock - disable an exclusive lock
 #   write
-#     set
-#     delete
+#     set - set a key to a value
+#     delete - delete a key
 #   read
-#     check
-#     get
-#     list
+#     check - check if a key exists
+#     get - get the value associated with a key
+#     list - get all keys
 
 # Protocol - the wire protocol for exchanging updates via some form of transport
 #  lifecycle
-#    start
-#    create
-#    remove
-#    finish
+#    start - start a communications session
+#    create - create a new database
+#    remove - remove an existing database
+#    finish - finish a communications session
 #  write
-#    set
-#    delete
+#    set - set a key to a value
+#    delete - delete a key
 #  sync
-#    request
+#    request - request history catchup from other copies
 #  comms
-#    send
-#    incoming
+#    send - send a raw encoded message
+#    incoming - receive a raw encoded message
 #  handlers
-#    dispatch
-#    do_set
-#    do_delete
-#    do_remove
-#    do_request
+#    dispatch - route a raw encoded message to correct handler
+#    do_set - set a key to a value
+#    do_delete - delete a key
+#    do_request - request history to be sent
 
 # END
