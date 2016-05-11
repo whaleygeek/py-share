@@ -73,14 +73,14 @@
 
 # Multicast - a network layer that communicates via multicasts on a UDP port
 # lifecycle
-#   start
-#   stop
+#   start(portname)
+#   stop()
 # transfer
-#   send
-#   check
-#   peek
-#   read
-#   on_incoming
+#   send(msg)
+#   check()->flag
+#   peek()->msg or None
+#   read()->msg or Exception
+#   on_incoming(callable)
 
 
 #----- TEST HARNESS -----------------------------------------------------------
@@ -103,7 +103,6 @@
 # db.push()
 # db.push(0,100)
 # db.push(0,db.revision()-1)
-
 
 
 # END
